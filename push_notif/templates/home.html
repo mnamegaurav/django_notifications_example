@@ -1,0 +1,85 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        input,button,textarea{
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div style="display: flex;flex-wrap: wrap;float:left;width: 100%;">
+        <div style="padding: 1%;border:2px solid lightgrey;margin: 10px auto;">
+            <h3>Notification</h3>
+            <form id="notif_form" method="POST">
+                {% csrf_token %}
+                <input type="text" name="notif_head" id="id_notif_head" maxlength="40" placeholder="Notification Head"><br>
+                <textarea type="text" name="msg" id="id_notif_msg" maxlength="100" placeholder="Notification Body" rows="5"></textarea><br>
+                <button type="submit">Push Notify</button>
+            </form>
+        </div>
+
+        <div style="padding: 1%;border:2px solid lightgrey;margin: 10px auto;">
+            <h3>Send Emails</h3>
+            <form id="email_form" method="POST">
+                {% csrf_token %}
+                <input type="text" name="sbj" id="id_sbj" maxlength="40" placeholder="Subject"><br>
+                <textarea type="text" name="msg" id="id_msg" placeholder="Message" rows="5"></textarea><br>
+                <input type="email" name="email" id="id_email" placeholder="Email"><br>
+                <button type="submit">Send Email</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="{% static 'jquery-3.4.1.js' %}"></script>
+
+    <script type="text/javascript">
+        $('#notif_form').submit(function(event){
+            event.preventDefault();
+            $.ajax({
+                url:'/notif_form/',
+                type:'POST',
+                dataType:'json',
+                data:{
+                    csrfmiddlewaretoken:'{{csrf_token}}',
+                    msg:$('#id_notif').val()
+                },
+                success:function(data){
+                    alert(data)
+                    console.log(data)
+                },
+                error:function(data){
+                    alert(data)
+                    console.log(data)
+                },
+            })
+        })
+
+        $('#email_form').submit(function(event){
+            event.preventDefault();
+            $.ajax({
+                url:'/email_form/',
+                type:'POST',
+                dataType:'json',
+                data:{ 
+                    csrfmiddlewaretoken:'{{csrf_token}}', 
+                    email:$('#id_email').val() , 
+                    sbj:$('#id_sbj').val() , 
+                    msg:$('#id_msg').val() 
+                },
+                success:function(data){
+                    alert(data)
+                    console.log(data)
+                },
+                error:function(xhr,errmsg,err){
+                    alert(xhr.status + ": " + xhr.responseText);
+                },
+            })
+        })
+    </script>
+</body>
+</html>
