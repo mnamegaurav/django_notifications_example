@@ -22,6 +22,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'vjej^_=s)9b4(m%(k-^)qz#%1&=js$n(r)%-px^e((t0=l&zh6'
 
+# SERVER KEY FOR FCM notifications
+
+SERVER_KEY = 'AAAAORakaH0:APA91bG4awFVHUeF8rjBjiRfvnckYB7xiiIwBrAJlW_3m5aN1IrHZMH0QGlLJZWg9TZgtJnHI9vmwhtQYzIk9FzPAEfU1JwNzy2haMUMQTCymJIAh4vR0EUpgfup4LSL7EMA3HtvNgq-'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -76,14 +80,14 @@ WSGI_APPLICATION = 'notification.wsgi.application'
 
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'notifications',
-        'USER': 'gaurav',
-        'PASSWORD': 'gaurav',
-        'HOST':'localhost',
-        'PORT':'',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': 'notifications',
+        # 'USER': 'gaurav',
+        # 'PASSWORD': 'gaurav',
+        # 'HOST':'localhost',
+        # 'PORT':'',
     }
 }
 
@@ -110,9 +114,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-in'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Calcutta'
 
 USE_I18N = True
 
@@ -131,5 +135,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'YOUR_EMAIL'
-EMAIL_HOST_PASSWORD = 'YOUR_PASSWORD'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''

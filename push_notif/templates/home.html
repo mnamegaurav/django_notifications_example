@@ -6,24 +6,31 @@
     <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style type="text/css">
-        input,button,textarea{
+        input,button,textarea,select{
             margin: 10px;
         }
     </style>
 </head>
 <body>
-    <div style="display: flex;flex-wrap: wrap;float:left;width: 100%;">
-        <div style="padding: 1%;border:2px solid lightgrey;margin: 10px auto;">
+    <div style="display: flex;flex-wrap: wrap;float:left;width: 100%;justify-content: center;">
+        <div style="padding: 1%;border:2px solid lightgrey;">
             <h3>Notification</h3>
             <form id="notif_form" method="POST">
                 {% csrf_token %}
-                <input type="text" name="notif_head" id="id_notif_head" maxlength="40" placeholder="Notification Head"><br>
-                <textarea type="text" name="msg" id="id_notif_msg" maxlength="100" placeholder="Notification Body" rows="5"></textarea><br>
+                <select id="id_target" name="target">
+                    <option>Teacher</option>
+                    <option>HM</option>
+                    <option>Block Admin</option>
+                    <option>District Admin</option>
+                    <option>State Admin</option>
+                </select><br>
+                <input type="text" name="msg_head" id="id_msg_head" maxlength="40" placeholder="Notification Head"><br>
+                <textarea type="text" name="msg_body" id="id_msg_body" maxlength="100" placeholder="Notification Body" rows="5"></textarea><br>
                 <button type="submit">Push Notify</button>
             </form>
         </div>
 
-        <div style="padding: 1%;border:2px solid lightgrey;margin: 10px auto;">
+        <div style="padding: 1%;border:2px solid lightgrey;">
             <h3>Send Emails</h3>
             <form id="email_form" method="POST">
                 {% csrf_token %}
@@ -40,14 +47,13 @@
     <script type="text/javascript">
         $('#notif_form').submit(function(event){
             event.preventDefault();
+            var form_data = new FormData($('#notif_form')[0])
             $.ajax({
                 url:'/notif_form/',
                 type:'POST',
-                dataType:'json',
-                data:{
-                    csrfmiddlewaretoken:'{{csrf_token}}',
-                    msg:$('#id_notif').val()
-                },
+                contentType:false,
+                processData:false,
+                data: form_data,
                 success:function(data){
                     alert(data)
                     console.log(data)
@@ -61,16 +67,13 @@
 
         $('#email_form').submit(function(event){
             event.preventDefault();
+            var form_data = new FormData($('#email_form')[0])
             $.ajax({
                 url:'/email_form/',
                 type:'POST',
-                dataType:'json',
-                data:{ 
-                    csrfmiddlewaretoken:'{{csrf_token}}', 
-                    email:$('#id_email').val() , 
-                    sbj:$('#id_sbj').val() , 
-                    msg:$('#id_msg').val() 
-                },
+                contentType:false,
+                processData:false,
+                data:form_data,
                 success:function(data){
                     alert(data)
                     console.log(data)
