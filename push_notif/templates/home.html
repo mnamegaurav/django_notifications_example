@@ -49,7 +49,7 @@
             event.preventDefault();
             var form_data = new FormData($('#notif_form')[0])
             $.ajax({
-                url:'/notif_form/',
+                url:'/send_notif/',
                 type:'POST',
                 contentType:false,
                 processData:false,
@@ -69,7 +69,7 @@
             event.preventDefault();
             var form_data = new FormData($('#email_form')[0])
             $.ajax({
-                url:'/email_form/',
+                url:'/send_notif/',
                 type:'POST',
                 contentType:false,
                 processData:false,

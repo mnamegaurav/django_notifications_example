@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home' ),
-    path('notif_form/', views.notif_form, name='notif_form'),
-    path('email_form/', views.email_form, name='email_form'),
+    path('fcm_insert/', views.fcm_insert, name='fcm_insert'),
+    path('send_notif/', views.send_notif, name='send_notif'),
+    path('send_email/', views.send_email, name='send_email'),
 ]

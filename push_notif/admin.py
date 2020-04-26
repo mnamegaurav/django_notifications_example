@@ -2,6 +2,6 @@ from django.contrib import admin
 from .models import *
 # Register your models here.
 
-admin.site.register(Users)
+admin.site.register(EmailUsers)
 admin.site.register(Notifications)
 admin.site.register(FCMToken)

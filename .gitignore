@@ -1,6 +1,7 @@
 /media/
 /static/
 db.sqlite3
-/notification/migrations/
+/notification/settings.py
+/push_notif/migrations/
 /push_notif/__pycache__/
 /push_notif/__pycache__/

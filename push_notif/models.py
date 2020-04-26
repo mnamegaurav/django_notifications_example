@@ -2,37 +2,30 @@ from django.db import models
 
 # Create your models here.
 
-NOTIFICATION_TARGET = (
-('1', 'Teacher'),
-('2', 'HM'),
-('3', 'Block Admin'),
-('4', 'District Admin'),
-('5', 'State Admin'),
-)
+class FCMToken(models.Model):
+    target_id = models.AutoField(primary_key=True)
+    fcm_token = models.CharField(max_length=100)
 
-class Users(models.Model):
+    def __str__(self):
+        return str(self.target_id)
 
-    name = models.CharField(max_length=40)
-    role = models.CharField(max_length=1,choices=NOTIFICATION_TARGET,default='1')
-    email = models.EmailField()
-    age = models.IntegerField()
-    date_created = models.DateTimeField(auto_now_add=True)
+class EmailUsers(models.Model):
+
+    to_email = models.EmailField()
+    message = models.TextField()
+    subject = models.CharField(max_length=60)
+    from_email = models.EmailField()
+    date_sent = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
 
 class Notifications(models.Model):
     
-    target = models.CharField(max_length=1,choices=NOTIFICATION_TARGET,default='1')
-    msg_head = models.CharField(max_length=30)
-    msg_body = models.TextField(blank=False)
+    target_id = models.OneToOneField(FCMToken, on_delete=models.CASCADE, primary_key=True)
+    msg_head = models.CharField(max_length=60)
+    msg_body = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.target
-
-class FCMToken(models.Model):
-    fcm_token = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.fcm_token
+        return self.msg_head

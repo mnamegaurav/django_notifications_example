@@ -1,0 +1,6 @@
+django.request: Not Found: /favicon.ico
+file_logger: 12:00:00
+django.request: Not Found: /media/user_profile_image/download.jpg
+django.request: Not Found: /media/user_profile_image/onkarsir2.jpg
+django.request: Not Found: /media/user_profile_image/pradeep.png
+django.request: Not Found: /media/13_2020-03-16.jpg
